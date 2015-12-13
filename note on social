@@ -1,0 +1,21 @@
+
+userid:social viene settato
+userid:social:songs vengono aggiunte le canzoni
+
+
+event add friend UserB
+  - viene inserito nel pending
+
+al connection si cerca se ci sono cose nel pending
+
+IMPORTANTE MODIFICARE METODO REDIS PER GESTIONE PENDING:SOCIAL
+ LPUSH INVECE DI SET
+LRANGE INVECE DI GET
+
+EVENT
+il server invia need join solo su richiesta
+il client puo aprire la connessione sol server senza fare richieta (il server potrebe chiuderla)
+
+se il server invia need_join:
+se creator accetta automaticamente (non dovrebbe avere altre social attive)
+se invited può accettare in qualunque momento (potrebbe avere una social già attiva)

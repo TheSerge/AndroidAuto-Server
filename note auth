@@ -1,0 +1,20 @@
+USE CASE : client richiede info utente
+client fa login su facebook. riceve accesstoken
+client comunica server user id e access token
+  -- ???? autenticazione (locale).. no..  --
+il server verifica che il client sia autenticato su facebook e quindi accesstoken valido verifica credenziali e  validità token
+il server verifica che il client e l'utente ''siano amici''
+il server ritorna le informazioni dell'utente al client
+
+
+il client accesso su fb e riceva authtoken
+
+client invia authtoken a server /checkfbToken
+
+servercontrolla se il token è valido, -> riceve il profilo ->
+il server invia un req a oauth/token . -> riceve un nuovo token da inoltrare al client
+
+il client success inviera il token nel campo authorization dell'header
+
+
+il server controlla per ogni req del client l'authorization dell'header

@@ -1,0 +1,62 @@
+Social Playlist
+social:idPlaylist {creator, admins, invited, listeners}
+social:idPlaylist:songs {idSongs}
+social:idPlaylist:permission {adminAllowed?}
+
+
+REDIS social  KEY: socialplaylist:userId
+REDIS permis  KEY: socialplaylist:userId:permission
+REDIS songs   KEY: socialplaylist:userId:songs
+
+http://localhost:3000/socialplaylist/create                 -> create room
+http://localhost:3000/socialplaylist/add/user               -> notify userB
+http://localhost:3000/socialplaylist/add/song               -> notify room
+http://localhost:3000/socialplaylist/vote/song              -> notify room
+http://localhost:3000/socialplaylist/permission/set
+http://localhost:3000/socialplaylist/permission/addAdmim/:idUser
+
+Songs
+REDIS KEY: userId:playlist:history
+
+http://localhost:3000/songs/add                             Add song to history - user is listening a song
+http://localhost:3000/songs/all                             All song from history - user requests all song from history
+http://localhost:3000/songs/recent                          Get recent songs from history
+
+----------------------------------------------
+
+
+Playlists
+REDIS song  KEY: userId:playlist:name
+REDIS info  KEY: userId:playlist:name:info
+REDIS names KEY: userId:playlist:playlistNames
+
+http://localhost:3000/playlists/:playlistName/create        Create a new playlist
+http://localhost:3000/playlists/:playlistName/add           Add song to a playlist
+http://localhost:3000/playlists/:playlistName/all           Get all song from playlist
+
+http://localhost:3000/playlists/request/:userB/:playlist    UserA ask for playlists of UserB
+
+----------------------------------------
+
+Permissions
+REDIS song  KEY: userId:permission
+http://localhost:3000/permissions/set                       Set permission list
+http://localhost:3000/permissions/                          Get permission list
+
+
+----------------------------------------
+
+Geolocation
+REDIS song  KEY: userId:geolocation
+http://localhost:3000/geolocation/set                       set position
+http://localhost:3000/geolocation/                          get position
+
+
+All information per User
+--playlist:names
+--playlist:foreach:info
+--playlist:foreach:songs
+--permission
+--position
+--socketId: id socket for user
+--sociall:  id of social registered

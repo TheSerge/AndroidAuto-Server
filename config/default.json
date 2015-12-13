@@ -1,0 +1,12 @@
+{
+    "oauth_mysql" : {
+        "user" : "jol",
+        "password" : "mobilab",
+        "host" : "localhost",
+        "database" : "oauthdb"
+    },
+
+    "port" : 3000,
+
+    "version" : "v1"
+}

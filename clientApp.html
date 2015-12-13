@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test App</title>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<div>
+<div id="left" style="float: left; min-height: 100%; width: 35%; border-right:2px solid black; overflow:scroll;">
+    <h2>Playlist</h2>
+    <div id="playlist" >
+        <ul><button     id="create_playlist">Create</button></ul>
+        <ul><button     id="add_song_playlist">Add song</button></ul>
+        <ul><button     id="all_song_of_playlist">Get all song of a playlist</button></ul>
+        <ul><button     id="all_playlist">Get all playlist name</button></ul>
+        <ul><button     id="all_playlist_detailed">Get all playlist's details</button></ul>
+    </div>
+
+    <h2>History</h2>
+    <div id="history" >
+        <ul><button     id="history_add">Add a song</button></ul>
+        <ul><button     id="history_all">Get all songs</button></ul>
+        <ul><button     id="history_recent">Get recent songs</button></ul>
+    </div>
+
+    <h2>Social</h2>
+    <div id="social">
+        <ul><button     id="invite_friend">invite friend</button></ul>
+    </div>
+
+    <h2>Permission</h2>
+    <div id="permission">
+        <ul><button     id="set_permission">Set permission</button></ul>
+        <ul><button     id="get_permission">Get permission</button></ul>
+    </div>
+
+    <h2>Geolocation</h2>
+    <div id="geolocation">
+        <ul><button     id="set_geo">Set position</button></ul>
+        <ul><button     id="get_geo">Get position</button></ul>
+    </div>
+
+    <h2>GO TO SOCIAL</h2>
+    <div id="aux">
+        <ul><button     id="go_to_social">Go To Social</button></ul>
+    </div>
+
+    <h2>Send FBtoken to server </h2>
+    <div id="auth">
+        <ul><button     id="authentication">Send</button></ul>
+    </div>
+
+</div>
+
+<div id="right" style="float: right; width: 60%">
+
+</div>
+</div>
+<script type="text/javascript">
+
+
+    //Playlist
+    //-create
+    $('#create_playlist').on('click', function (e) {
+        var name = prompt('Type a name for Playlist');
+        var url = 'http://localhost:3000/playlists/create/'+name;
+        $('#right').load(url);
+    });
+
+    //add song
+    $('#add_song_playlist').on('click', function (e) {
+        var playlist = prompt('Type a name for Playlist');
+        var idSong = prompt('Type an idSong');
+
+        var url = 'http://localhost:3000/playlists/add/'+playlist+'/'+idSong;
+        $('#right').load(url);
+    });
+
+    //all song of playlist
+    $('#all_song_of_playlist').on('click', function (e) {
+        var playlist = prompt('Type a name for Playlist');
+        var url = 'http://localhost:3000/playlists/'+playlist+'/all';
+        $('#right').load(url);
+    });
+
+    //all names
+    $('#all_playlist').on('click', function (e) {
+        var url = 'http://localhost:3000/playlists/all';
+        $('#right').load(url);
+    });
+
+    //all details
+    $('#all_playlist_detailed').on('click', function (e) {
+        var url = 'http://localhost:3000/playlists/allDetailed';
+        $('#right').load(url);
+    });
+
+    //History
+    //-add
+    $('#history_add').on('click', function (e) {
+        var idSong   = prompt('Type an idSong');
+        var url = 'http://localhost:3000/songs/add/'+idSong;
+        $('#right').load(url);
+    });
+
+    //-all
+    $('#history_all').on('click', function (e) {
+        var url = 'http://localhost:3000/songs/all';
+        $('#right').load(url);
+    });
+
+    //-recent
+    $('#history_recent').on('click', function (e) {
+        var url = 'http://localhost:3000/songs/recent';
+        $('#right').load(url);
+    });
+
+    //Geolocation
+    //-set
+    $('#set_geo').on('click', function (e) {
+        // var lat = prompt('Type the name of Playlist');
+        // var lon   = prompt('Type the id of user');
+        var url = 'http://localhost:3000/geolocation/set';
+        $('#right').load(url);
+    });
+
+    //-get
+    $('#get_geo').on('click', function (e) {
+        var url = 'http://localhost:3000/geolocation/';
+        $('#right').load(url);
+    });
+
+    //Permission
+    //-set
+    $('#set_permission').on('click', function (e) {
+        // var lat = prompt('Type the name of Playlist');
+        // var lon   = prompt('Type the id of user');
+        var url = 'http://localhost:3000/permissions/set';
+        $('#right').load(url);
+    });
+
+    //-get
+    $('#get_permission').on('click', function (e) {
+        var url = 'http://localhost:3000/permissions/';
+        $('#right').load(url);
+    });
+
+    //Social
+    //-invite
+    $('#invite_friend').on('click', function (e) {
+        var playlist = prompt('Type the name of Playlist');
+        var userId   = prompt('Type the id of user');
+        var url = 'http://localhost:3000/socialplaylist/invite/'+userId+'/to/'+playlist;
+        $('#right').load(url);
+    });
+
+    $('#go_to_social').on('click', function (e) {
+        var url = 'http://localhost:3000/secret';
+        $('#right').load(url);
+    });
+
+    $('#authentication').on('click', function (e) {
+        postIt();
+    });
+
+
+    function postIt()   {
+        var form = document.createElement('form');
+        form.setAttribute('method', 'POST');
+        form.setAttribute('action', 'http://localhost:3000/checkFbToken');
+        var myvar = document.createElement('input');
+        myvar.setAttribute('fb_access_token','CAANDsKhecZCQBAEAewglY5cfRaXCe6Ily7AqZBdV0HIGEWGbMhZCHepMN7yaU2XbIYGDfbPCDUZAZALj9lwaVNMMb3LEYJKpu8H5BNezEWhRlZCnNBv2VDq1ZCbnKd9fFIL02hiSUZB9ErUUO5R7nbEIwjxjWZALoZBTFZAjI7lQC5ZClURcrTeMM1v1ohq1mlI9sXh4dgFwZAmBS6gZDZD');
+        form.appendChild(myvar);
+        document.body = appendChild(form);
+        form.submit();
+    }
+
+</script>
+</body>
+</html>

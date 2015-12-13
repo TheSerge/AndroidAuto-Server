@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <title>test</title>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    var socket = io();
+
+    $(document).off('click', '#connect').on('click', '#connect', function (e) {
+        console.log('click connect');
+
+        var user = prompt('type a user id')
+        socket.emit('connect', {userId: user});
+        e.preventDefault();
+    });
+
+    $(document).off('click', '#join_room').on('click', '#join_room', function (e) {
+        console.log('click join_room');
+        var room = prompt('type a room name')
+
+        // Emit ready event with room name.
+        socket.emit('ready', room);
+    });
+
+    $(document).off('click', '#add_new_admin').on('click', '#add_new_admin', function (e) {
+        console.log('click add_new_admin');
+
+        var user = prompt('type a user id')
+        socket.emit('add_new_admin', user);
+    });
+
+    $(document).off('click', '#add_new_song').on('click', '#add_new_song', function (e) {
+        console.log('click add_new_song');
+
+        var song = prompt('type a song id')
+        socket.emit('add_new_song', song);
+    });
+
+    $(document).off('click', '#vote_song').on('click', '#vote_song', function (e) {
+        console.log('click vote_song');
+
+        var song = prompt('type a song id')
+        var vote = prompt('type a vote')
+        socket.emit('vote_song', song, vote);
+    });
+
+
+
+    //client in listening
+    socket.on('message', function (message) {
+        console.log(message);
+        //$('body').css('background', color);
+        console.log('received: '+message);
+
+    });
+</script>
+
+<button       id="connect">connect</button>
+<button     id="join_room">join_room</button>
+<button id="add_new_admin">add_new_admin</button>
+<button  id="add_new_song">add_new_song</button>
+<button     id="vote_song">vote_song</button>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h2 User ID: #{userId}
+  h1= title
+  h4 #{message}
+  if locals.extra
+    ul
+      each  val in extra
+        li= val
+

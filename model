@@ -1,0 +1,47 @@
+NEW
+Song            : idSong
+Playlist        : name, [song]      //included history
+SocialPlaylist  : creator, [admin], invited, participants
+User            : idUser, [Playlist], SocialPlaylist?, permission, geolocation
+
+userid:social -> idsocial
+
+social:id ---> playlist social
+
+
+
+Le social playlist onn appartengono ad uno user, quin di venegno salvate separatamenet
+REDIS KEY:  social:idSocial
+
+
+OLD
+Song       : title, album, artist, duration, genre
+Playlist   : name,[Song]
+History    : [Song]
+User       : id, History, [Playlist], token, [Permission]
+Permission : key,value
+
+DB
+user
+-authentication data
+-permissions
+-playlist {history, playlists}
+-geolocation
+
+
+store new playlist for a user
+
+userA:playlistA:song
+
+------------------------------------------------------------------
+userB
+-set permission
+-set playlist
+    -set song
+    -set song
+-set playlist
+    -set song
+
+
+userA
+-get playlist UserB

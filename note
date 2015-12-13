@@ -1,0 +1,12 @@
+router. post exist!!!!!!!!
+
+
+modulo redis
+
+
+save in db:
+ -list user
+ -list song
+
+ because is necessary check its existing before operate on that
+

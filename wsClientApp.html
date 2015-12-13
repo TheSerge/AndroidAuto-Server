@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+    <title>test</title>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    var socket = io();
+    var socialID = undefined;
+
+    socket.on('connect', function() {
+        $("#join_room").attr("disabled", true);
+
+        console.log('client received connect event from server');
+
+        socket.on('need_join', function(data){
+            $("#join_room").attr("disabled", false);
+
+            console.log('received \'need_join\' for '+data.socialId)
+            console.log('The data in the need join request says that i\'m the \''+data.role+'\' for '+data.socialId);
+            if(data.role=='creator') {
+                socket.emit('join_room', data);
+                console.log('AUTO emitted \'join_room\' - because creator role')
+                $("#join_room").attr("disabled", true);
+            }
+            socialID = data.socialId;
+        });
+
+        socket.on('joined', function(data){
+            console.log('received joined.. welcome!')
+        });
+
+        socket.on('message', function(data){
+            console.log('received message.. :'+data.message)
+        });
+
+        socket.on('rank_updated', function(data){
+            console.log('received rank_updated: whatever you want! The are data magic')
+            $( "p").empty();
+            for(var i=0; i<data.songs.length; i++) {
+                console.log(data.songs[i]);
+                $("p").append('<br>'+data.songs[i]+'</br>');
+            }
+        });
+
+        $('#join_room').on('click', function (e) {
+            if(socialID==undefined)
+                return;
+            console.log('click join_room');
+
+            socket.emit('join_room', {socialId: socialID});
+            console.log('emitted join_room');
+        });
+
+        $('#vote_song').on('click', function (e) {
+            if(socialID==undefined)
+                return;
+
+            console.log('click vote_song');
+
+            var song = prompt('type a song id')
+            socket.emit('vote_song', {socialId: socialID, song: song});
+        });
+
+        $('#leave_room').on('click', function (e) {
+            if(socialID==undefined)
+                return;
+
+            console.log('click leave_room');
+            socket.emit('leave_room', {socialId: socialID});
+            $("#join_room").attr("disabled", false);
+        });
+
+
+    });
+
+</script>
+<button     id="join_room">join_room</button>
+<button     id="vote_song">vote_song</button>
+<button     id="leave_room">leave_room</button>
+
+<p></p>
+</body>
+</html>
