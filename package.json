@@ -7,8 +7,11 @@
   },
   "dependencies": {
     "body-parser": "~1.13.2",
+    "config": "^1.17.1",
     "cookie-parser": "~1.3.5",
+    "dateformat": "1.0.12",
     "debug": "~2.2.0",
+    "describe-property": "1.1.0",
     "express": "~4.13.1",
     "express-session": "^1.12.1",
     "express-socket.io-session": "^1.3.1",
@@ -16,13 +19,14 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "myoauthexample": "file:..\\myoauthexample-master",
+    "mysql": "^2.9.0",
+    "node-inspector": "0.12.3",
+    "oauth2-server": "^2.4.1",
+    "object-assign": "2.1.1",
     "redis": "^0.12.1",
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.3.7",
     "socket.io-client": "^1.3.7",
-    "describe-property": "1.1.0",
-    "node-inspector":"0.12.3",
-    "object-assign":"2.1.1",
-    "then-redis":"1.3.0"
+    "then-redis": "1.3.0"
   }
 }
