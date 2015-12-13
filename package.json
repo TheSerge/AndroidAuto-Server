@@ -18,7 +18,6 @@
     "express.io": "^1.1.13",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
-    "myoauthexample": "file:..\\myoauthexample-master",
     "mysql": "^2.9.0",
     "node-inspector": "0.12.3",
     "oauth2-server": "^2.4.1",
